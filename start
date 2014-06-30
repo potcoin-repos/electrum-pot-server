@@ -7,7 +7,7 @@ if [[ $PID != *[!0-9]* ]]; then
 fi
 
 
-electrum_config="/etc/electrum.conf"
+electrum_config="/etc/electrum-pot.conf"
 
 if [ ! -f $electrum_config ]; then
     echo "$electrum_config does not exist"
@@ -30,9 +30,10 @@ if [ ! -d $path ]; then
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mkdir -p $path
-	wget -O - "http://foundry.electrum.org/leveldb-dump/electrum-fulltree-100-latest.tar.gz" | tar --extract --gunzip --strip-components 1 --directory $path --file -
+	#wget -O - "http://foundry.electrum-pot.org/leveldb-dump/electrum-fulltree-100-latest.tar.gz" | tar --extract --gunzip --strip-components 1 --directory $path --file -
+	#uncomment out above when you acquire a server ...
     fi
 fi
 
 echo "Starting server as daemon"
-nohup /usr/bin/python -u server.py &> /var/log/electrum.log &
+nohup /usr/bin/python -u server.py &> /var/log/electrum-pot.log &

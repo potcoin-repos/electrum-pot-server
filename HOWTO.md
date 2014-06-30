@@ -200,7 +200,7 @@ It's recommended to fetch a pre-processed leveldb from the net
 
 You can fetch recent copies of electrum leveldb databases and further instructions 
 from the Electrum full archival server foundry at:
-http://foundry.electrum.org/ 
+http://foundry.electrum-pot.org/leveldb-dump/ (DOES NOT YET EXIST) 
 
 Alternatively if you have the time and nerve you can import the blockchain yourself.
 
@@ -265,7 +265,7 @@ in case you need to restore it.
 
 ### Step 10. Configure Electrum server
 
-Electrum reads a config file (/etc/electrum.conf) when starting up. This
+Electrum reads a config file (/etc/electrum-pot.conf) when starting up. This
 file includes the database setup, bitcoind RPC setup, and a few other
 options.
 

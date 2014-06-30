@@ -39,7 +39,7 @@ make sure you have libtool, automake and pkg-config
 
 __________________________________________________________
 
-3. edit /etc/electrum.conf : 
+3. edit /etc/electrum-pot.conf : 
 
 [server]
 backend = leveldb
@@ -55,10 +55,10 @@ ______________________________________________________________
 In order to speed up the initial catch_up phase, it is recommended to
 locate your database in shared memory:
 
- path = /run/shm/electrum_db
+ path = /run/shm/electrum-pot_db
 
 Once your server has finished catching up, copy your database to disk
-and update the path in /etc/electrum.conf
+and update the path in /etc/electrum-pot.conf
 
 During the catch_up phase, you can interrupt the server with Ctrl-C;
 it will safely write the current status in the database and exit.
