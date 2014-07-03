@@ -113,7 +113,7 @@ here are some pointers for Ubuntu :
 	$ cp -a ~/build/potcoin/src/potcoind ~/bin/potcoind
 	
 	
-(note that if you during make get an error similar to: 'fatal error: miniupnpc/miniwidget.h: No 
+(note that if during make you get an error similar to: 'fatal error: miniupnpc/miniwidget.h: No 
 such file' you *might* have luck issuing `apt-get install libminiupnpc-dev`)
 
 ### Step 4. Configure and start potcoind
@@ -204,7 +204,7 @@ http://foundry.electrum-pot.org/leveldb-dump/ (DOES NOT YET EXIST)
 
 Alternatively if you have the time and nerve you can import the blockchain yourself.
 
-As of June 2014 it takes ___(?)___ to import 500k of blocks, depending
+As of June 2014 it takes ___(?)___ to import 300k of blocks, depending
 on CPU speed, I/O speed and selected pruning limit.
 
 It's considerably faster and strongly recommended to index in memory. You can use /dev/shm or
@@ -269,7 +269,7 @@ Electrum reads a config file (/etc/electrum-pot.conf) when starting up. This
 file includes the database setup, potcoind RPC setup, and a few other
 options.
 
-    $ sudo cp ~/src/electrum/server/electrum.conf.sample /etc/electrum-pot.conf
+    $ sudo cp ~/electrum-pot-server/electrum.conf.sample /etc/electrum-pot.conf
     $ sudo $EDITOR /etc/electrum-pot.conf
 
 Go through the sample config options and set them to your liking.
@@ -279,7 +279,7 @@ If you intend to run the server publicly have a look at README-IRC.md
 
 Electrum Potcoin server currently needs quite a few file handles to use leveldb. It also requires
 file handles for each connection made to the server. It's good practice to increase the
-open files limit to 16k. This is most easily achived by sticking the value in .bashrc of the
+open files limit to 16k. This is most easily achieved by sticking the value in .bashrc of the
 root user who usually passes this value to all unprivileged user sessions too.
 
     $ sudo sed -i '$a ulimit -n 16384' /root/.bashrc
