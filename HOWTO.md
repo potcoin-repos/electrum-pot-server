@@ -1,11 +1,11 @@
-How to run your own Electrum-POT server
+How to run your own Electrum-Potcoin server
 ===================================
 
 Abstract
 --------
 
 This document is an easy to follow guide to installing and running your own
-Electrum POT server on Linux. It is structured as a series of steps you need to
+Electrum Potcoin server on Linux. It is structured as a series of steps you need to
 follow, ordered in the most logical way. The next two sections describe some
 conventions we use in this document and hardware, software and expertise
 requirements.
@@ -55,11 +55,11 @@ Python libraries.
 **Hardware.** The lightest setup is a pruning server with diskspace 
 requirements of about 1 GB for the electrum-pot database. However note that 
 you also need to run potcoind and keep a copy of the full blockchain, 
-which is roughly 1 GB in June 2014. If you have less than 2 GB of RAM 
+which is roughly 500 MB in June 2014. If you have less than 2 GB of RAM 
 make sure you limit bitcoind to 8 concurrent connections. If you have more 
 ressources to  spare you can run the server with a higher limit of historic 
 transactions per address. CPU speed is important, mostly for the initial block 
-chain import, but also if you plan to run a public Electrum POT server, which 
+chain import, but also if you plan to run a public Electrum Potcoin server, which 
 could serve tens of concurrent requests. Any multi-core x86 CPU ~2009 or
 newer other than Atom should do for good performance. An ideal setup
 has enough RAM to hold and procss the leveldb database in tmpfs (e.g. /dev/shm).
@@ -67,18 +67,18 @@ has enough RAM to hold and procss the leveldb database in tmpfs (e.g. /dev/shm).
 Instructions
 ------------
 
-### Step 1. Create a user for running potcoind and Electrum-POT server
+### Step 1. Create a user for running potcoind and Electrum-Potcoin server
 
 This step is optional, but for better security and resource separation I
-suggest you create a separate user just for running `potcoind` and Electrum-POT.
+suggest you create a separate user just for running `potcoind` and Electrum-Potcoin.
 We will also use the `~/bin` directory to keep locally installed files
-(others might want to use `/usr/local/bin` instead). We will download source
-code files to the `~/src` directory.
+(others might want to use `/usr/local/bin` instead). We will build potcoind from 
+source code in the `~/build` directory.
 
     $ sudo adduser potcoin --disabled-password
     $ sudo apt-get install git
     # su - potcoin
-    $ mkdir ~/bin ~/src
+    $ mkdir ~/bin ~/build
     $ echo $PATH
 
 If you don't see `/home/potcoin/bin` in the output, you should add this line
@@ -86,24 +86,23 @@ to your `.bashrc`, `.profile` or `.bash_profile`, then logout and relogin:
 
     PATH="$HOME/bin:$PATH"
 
-### Step 2. Download and install Electrum
+### Step 2. Download and install Electrum-Potcoin server
 
-We will download the latest git snapshot for Electrum and 'install' it in
+We will download the latest git snapshot for Electrum-pot-server and 'install' it in
 our ~/bin directory:
 
     $ mkdir -p ~/electrum-pot-server
-    $ git clone https://github.com/sorce/electrum-pot-server.git
-	$ chmod +x ~/electrum-pot-server/src/start
-	$ ln -s ~/electrum-pot-server/src/start ~/bin/electrum-pot-server
+    $ git clone https://github.com/sorce/electrum-pot-server.git electrum-pot-server
 
 ### Step 3. Download potcoind
 
-Older versions of Electrum-POT used to require a patched version of potcoind. 
+Older versions of Electrum-Potcoin used to require a patched version of potcoind. 
 This is not the case anymore since potcoind supports the 'txindex' option.
 We currently recommend potcoind 0.8.6.4 stable.
 
 If your package manager does not supply a recent potcoind and prefer to compile
-here are some pointers for Ubuntu:
+here are some pointers for Ubuntu :
+
 
     # apt-get install make g++ python-leveldb libboost-all-dev libssl-dev libdb++-dev pkg-config
     # su - potcoin
@@ -112,12 +111,16 @@ here are some pointers for Ubuntu:
 	$ make -f makefile.unix
 	$ strip potcoind
 	$ cp -a ~/build/potcoin/src/potcoind ~/bin/potcoind
+	
+	
+(note that if you during make get an error similar to: 'fatal error: miniupnpc/miniwidget.h: No 
+such file' you *might* have luck issuing `apt-get install libminiupnpc-dev`)
 
-### Step 4. Configure and start bitcoind
+### Step 4. Configure and start potcoind
 
 In order to allow Electrum to "talk" to `potcoind`, we need to set up a RPC
 username and password for `potcoind`. We will then start `potcoind` and
-wait for it to complete downloading the potchain (blockchain).
+wait for it to complete downloading the blockchain.
 
     $ mkdir ~/.potcoin
     $ $EDITOR ~/.potcoin/potcoin.conf
@@ -150,9 +153,9 @@ You should also set up your system to automatically start potcoind at boot
 time, running as the 'potcoin' user. Check your system documentation to
 find out the best way to do this.
 
-### Step 5. Install Electrum dependencies
+### Step 5. Install Electrum-Potcoin server dependencies
 
-Electrum POT server depends on various standard Python libraries. These will be
+Electrum Potcoin server depends on various standard Python libraries. These will be
 already installed on your distribution, or can be installed with your
 package manager. Electrum also depends on two Python libraries which we will
 need to install "by hand": `JSONRPClib`.
@@ -172,7 +175,7 @@ leveldb should be at least version 1.1.9. Earlier version are believed to be bug
 
 ### Step 7. Select your limit
 
-Electrum POT server uses leveldb to store transactions. You can choose
+Electrum Potcoin server uses leveldb to store transactions. You can choose
 how many spent transactions per address you want to store on the server.
 The default is 100, but there are also servers with 1000 or even 10000.
 Few addresses have more than 10000 transactions. A limit this high
@@ -260,7 +263,7 @@ your server with a different server name along with a new certificate for this s
 Therefore it's a good idea to make an offline backup copy of your certificate and key
 in case you need to restore it.
 
-### Step 10. Configure Electrum POT server
+### Step 10. Configure Electrum Potcoin server
 
 Electrum reads a config file (/etc/electrum-pot.conf) when starting up. This
 file includes the database setup, potcoind RPC setup, and a few other
@@ -274,7 +277,7 @@ If you intend to run the server publicly have a look at README-IRC.md
 
 ### Step 11. Tweak your system for running electrum
 
-Electrum POT server currently needs quite a few file handles to use leveldb. It also requires
+Electrum Potcoin server currently needs quite a few file handles to use leveldb. It also requires
 file handles for each connection made to the server. It's good practice to increase the
 open files limit to 16k. This is most easily achived by sticking the value in .bashrc of the
 root user who usually passes this value to all unprivileged user sessions too.
@@ -295,24 +298,24 @@ Two more things for you to consider:
 2. Consider restarting potcoind (together with electrum-pot-server) on a weekly basis to clear out unconfirmed
    transactions from the local the memory pool which did not propagate over the network
 
-### Step 12. (Finally!) Run Electrum POT server
+### Step 12. (Finally!) Run Electrum-Potcoin server
 
-The magic moment has come: you can now start your Electrum POT server:
+The magic moment has come: you can now start your Electrum Potcoin server:
 
     $ cd ~/electrum-pot-server
     $ ./start
 
 You should see this in the log file:
 
-    starting Electrum POT server
+    starting Electrum Potcoin server
 
-If you want to stop Electrum POT server, use the 'stop' script:
+If you want to stop Electrum Potcoin server, use the 'stop' script:
 
     $ cd ~/electrum-pot-server
     $ ./stop
 
 
-### Step 13. Test the Electrum POT server
+### Step 13. Test the Electrum-Potcoin server
 
 We will assume you have a working Electrum client, a wallet and some
 transactions history. You should start the client and click on the green
@@ -320,7 +323,7 @@ checkmark (last button on the right of the status bar) to open the Server
 selection window. If your server is public, you should see it in the list
 and you can select it. If you server is private, you need to enter its IP
 or hostname and the port. Press Ok, the client will disconnect from the
-current server and connect to your new Electrum POT server. You should see your
+current server and connect to your new Electrum Potcoin server. You should see your
 addresses and transactions history. You can see the number of blocks and
 response time in the Server selection window. You should send/receive some
 potcoins to confirm that everything is working properly.
@@ -331,7 +334,7 @@ Say hi to the dev crew, other server operators and fans on
 irc.freenode.net #electrum and we'll try to congratulate you
 on supporting the community by running an Electrum node
 
-If you're operating a public Electrum POT server please subscribe
+If you're operating a public Electrum Potcoin server please subscribe
 to or regulary check the following thread:
 https://bitcointalk.org/index.php?topic=85475.0
 It'll contain announcements about important updates to Electrum

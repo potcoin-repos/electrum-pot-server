@@ -10,7 +10,7 @@ short outline:
 __________________________________________________________
 1. Run potcoind.
 
-Install version 0.8.5 or higher.
+Install version 0.8.6.4 or higher.
 There is no need to patch potcoind anymore.
 You need to run it with the config option txindex=1 .
 If you have not previously done so, you may need to reindex the potcoind blockchain
@@ -45,7 +45,7 @@ __________________________________________________________
 backend = leveldb
 
 [leveldb]
-path = /path/to/your/database
+path_fulltree = /path/to/your/database
 pruning_limit = 10
 
 ______________________________________________________________
@@ -55,7 +55,7 @@ ______________________________________________________________
 In order to speed up the initial catch_up phase, it is recommended to
 locate your database in shared memory:
 
- path = /run/shm/electrum-pot_db
+ path_fulltree = /run/shm/electrum-pot_db
 
 Once your server has finished catching up, copy your database to disk
 and update the path in /etc/electrum-pot.conf
