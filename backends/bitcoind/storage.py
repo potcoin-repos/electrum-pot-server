@@ -41,8 +41,8 @@ class Storage(object):
         except:
             #traceback.print_exc(file=sys.stdout)
             print_log('initializing database')
-            self.height = 0 # 1? see http://potchain.net/block/5c894fbcb3b4043cb3140473207a9691d05d20163c3d5ff9228217fd776e7637
-            self.last_hash = '5c894fbcb3b4043cb3140473207a9691d05d20163c3d5ff9228217fd776e7637'
+            self.height = 0
+            self.last_hash = 'de36b0cb2a9c7d1d7ac0174d0a89918f874fabcf5f9741dd52cd6d04ee1335ec'
             db_version = self.db_version
             # write root
             self.put_node('', {})
