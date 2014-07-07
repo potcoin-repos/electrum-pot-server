@@ -43,6 +43,8 @@ class IrcThread(threading.Thread):
         self.prepend = 'E_'
         if config.get('server', 'coin') == 'litecoin':
             self.prepend = 'EL_'
+        elif config.get('server', 'coin') == 'potcoin':
+            self.prepend = 'EP_'
         self.pruning = config.get('server', 'backend') == 'leveldb'
         if self.pruning:
             self.pruning_limit = config.get('leveldb', 'pruning_limit')
@@ -91,7 +93,7 @@ class IrcThread(threading.Thread):
             try:
                 s.send('USER electrum 0 * :' + self.host + ' ' + ircname + '\n')
                 s.send('NICK ' + self.nick + '\n')
-                s.send('JOIN #electrum\n')
+                s.send('JOIN #electrum-pot\n')
                 t = 0
 
                 while not self.processor.shared.stopped():
@@ -142,7 +144,7 @@ class IrcThread(threading.Thread):
 
                     if time.time() - t > 5*60:
                         #self.processor.push_response({'method': 'server.peers', 'params': [self.get_peers()]})
-                        s.send('NAMES #electrum\n')
+                        s.send('NAMES #electrum-pot\n')
                         t = time.time()
                         self.peers = {}
             except:

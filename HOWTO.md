@@ -331,7 +331,7 @@ potcoins to confirm that everything is working properly.
 ### Step 14. Join us on IRC, subscribe to the server thread
 
 Say hi to the dev crew, other server operators and fans on 
-irc.freenode.net #electrum and we'll try to congratulate you
+irc.freenode.net #electrum-pot and we'll try to congratulate you
 on supporting the community by running an Electrum node
 
 If you're operating a public Electrum Potcoin server please subscribe
