@@ -307,7 +307,7 @@ The magic moment has come: you can now start your Electrum Potcoin server:
 
 You should see this in the log file:
 
-    starting Electrum Potcoin server
+    starting Electrum server
 
 If you want to stop Electrum Potcoin server, use the 'stop' script:
 
