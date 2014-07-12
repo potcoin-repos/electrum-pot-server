@@ -10,7 +10,7 @@ stratum_http_port = 8081
 #report_stratum_tcp_ssl_port = 50002
 #report_stratum_http_ssl_port = 443
 password = secret
-banner = Welcome to Electrum!
+banner = Welcome to Electrum-POT!
 #irc = no
 #irc_nick = <yournickname>
 #ssl_certfile = /path/to/electrum-server.crt
@@ -28,7 +28,7 @@ pruning_limit = 100
 
 [bitcoind]
 host = localhost
-port = 10332
+port = 42000
 # user and password from potcoin.conf
 user = user
 password = password

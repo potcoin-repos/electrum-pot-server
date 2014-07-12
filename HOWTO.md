@@ -114,7 +114,8 @@ here are some pointers for Ubuntu :
 	
 	
 (note that if during make you get an error similar to: 'fatal error: miniupnpc/miniwidget.h: No 
-such file' you *might* have luck issuing `apt-get install libminiupnpc-dev`)
+such file' you *might* have luck issuing `apt-get install libminiupnpc-dev`; If not you can try 
+installing http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.5.tar.gz)
 
 ### Step 4. Configure and start potcoind
 

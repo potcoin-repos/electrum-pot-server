@@ -44,7 +44,7 @@ def create_config():
     config = ConfigParser.ConfigParser()
     # set some defaults, which will be overwritten by the config file
     config.add_section('server')
-    config.set('server', 'banner', 'Welcome to Electrum!')
+    config.set('server', 'banner', 'Welcome to Electrum-POT!')
     config.set('server', 'host', 'localhost')
     config.set('server', 'report_host', '')
     config.set('server', 'stratum_tcp_port', '50001')
