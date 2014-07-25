@@ -30,8 +30,7 @@ if [ ! -d $path ]; then
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mkdir -p $path
-	#wget -O - "http://foundry.electrum-pot.org/leveldb-dump/electrum-fulltree-100-latest.tar.gz" | tar --extract --gunzip --strip-components 1 --directory $path --file -
-	#uncomment out above when you acquire a server ...
+	wget -O - "http://electrum-pot.mooo.com/leveldb-dump/electrum-pot_fulltree-100-current.tar.gz" | tar --extract --gunzip --strip-components 1 --directory $path --file -
     fi
 fi
 
